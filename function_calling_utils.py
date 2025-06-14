@@ -560,11 +560,10 @@ def exract_pdf_text_aws(file):
         else:
             img_bytes = io.BytesIO()
             s3.Bucket(bucket_name).download_fileobj(key, img_bytes)
-            img_bytes.seek(0)         
-            image_stream = io.BytesIO(image_bytes)
-            image = Image.open(image_stream)
+            img_bytes.seek(0)
+            image = Image.open(img_bytes)
             text = pytesseract.image_to_string(image)
-        return text    
+        return text
 
 def detect_encoding(s3_uri):
     """detect csv encoding"""
